@@ -31,6 +31,17 @@ public class LoginController extends HttpServlet {
 		
 		String mid = request.getParameter("mid");
 		String mpw = request.getParameter("mpw");
+		String mtemp = request.getParameter("temp");
+		
+		HttpSession session = request.getSession();
+		String tempValue = (String)session.getAttribute("temp");
+		
+		/* 자동로그인방지 문자 검사 */
+		if(!(mtemp.equals(tempValue))) {
+			response.sendRedirect("/member/login?result=fail3");
+			return;
+		}
+		
 		
 		if(mid.equals("u1")&&mpw.equals("u1")) { //로그인 성공
 			/*세션 제작 : MemberVO*/
@@ -54,7 +65,6 @@ public class LoginController extends HttpServlet {
 				response.addCookie(rememberMeCookie); // 로그인 후 요청 헤더-Cookie 에서 확인 가능
 			}
 			
-			HttpSession session = request.getSession();
 			session.setAttribute("member", vo);
 			
 			response.sendRedirect("/sample/list"); //컨트롤러 경로로 보낸다.
