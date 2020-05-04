@@ -12,6 +12,7 @@
 	<form method="post">
 		<input type="text" name="mid" value="u1">
 		<input type="text" name="mpw" value="u1">
+				<input type="checkbox" name="rememberme" checked>Remember Me
 		<button>로그인</button>
 	</form>
 </body>
